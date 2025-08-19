@@ -2708,19 +2708,43 @@ function displayResults(results) {
 function showReview() {
     const reviewContent = document.getElementById('review-content');
     const results = calculateResults();
+    const examQuestions = getCurrentExamQuestions();
     
     let reviewHTML = '';
     results.questionResults.forEach(result => {
+        const questionIndex = result.questionNumber - 1;
+        const question = examQuestions[questionIndex];
+        
+        // Get user's selected option texts
+        let userAnswerTexts = [];
+        if (result.userAnswer.length > 0) {
+            result.userAnswer.forEach(answerLetter => {
+                const optionIndex = answerLetter.charCodeAt(0) - 65; // Convert A=0, B=1, etc.
+                if (optionIndex >= 0 && optionIndex < question.options.length) {
+                    userAnswerTexts.push(question.options[optionIndex]);
+                }
+            });
+        }
+        
+        // Get correct answer option texts
+        let correctAnswerTexts = [];
+        result.correctAnswer.forEach(answerLetter => {
+            const optionIndex = answerLetter.charCodeAt(0) - 65; // Convert A=0, B=1, etc.
+            if (optionIndex >= 0 && optionIndex < question.options.length) {
+                correctAnswerTexts.push(question.options[optionIndex]);
+            }
+        });
+        
         reviewHTML += `
             <div class="review-question">
                 <h4>Question ${result.questionNumber}</h4>
                 <p>${result.question}</p>
                 <div class="review-options">
                     <div class="review-option ${result.isCorrect ? 'correct' : 'incorrect'}">
-                        <strong>Your Answer:</strong> ${result.userAnswer.length > 0 ? result.userAnswer.join(', ') : 'No answer'}
+                        <strong>Your Answer:</strong> ${userAnswerTexts.length > 0 ? userAnswerTexts.join('<br>') : 'No answer selected'}
                     </div>
                     <div class="review-option correct">
-                        <strong>Correct Answer:</strong> ${result.correctAnswer.join(', ')}
+                        <strong>Correct Answer:</strong> ${correctAnswerTexts.join('<br>')}
                     </div>
                     <div class="review-option">
                         <strong>Points:</strong> ${result.points}/20
