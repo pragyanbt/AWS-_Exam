@@ -88,14 +88,6 @@ This application is designed by **Pragyan Budhathoki** to help candidates take m
 
 ## 📚 Exam Content
 
-### Practice Exam Sets
-
-1. **Practice Exam 1** - Comprehensive coverage of AWS fundamentals
-2. **Practice Exam 2** - Original exam set with core concepts
-3. **Practice Exam 3** - Advanced topics and scenarios
-4. **Practice Exam 4** - Cost optimization and management
-5. **Practice Exam 5** - Security, compliance, and best practices
-
 ### Question Categories
 
 - **AWS Global Infrastructure**
