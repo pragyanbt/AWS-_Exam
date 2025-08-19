@@ -3,20 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS Practice Exam 20</title>
+    <title>AWS Practice Exams</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
+        <!-- Dashboard Screen -->
+        <div id="dashboard-screen" class="screen active">
+            <div class="dashboard-content">
+                <div class="dashboard-header">
+                    <h1>AWS Cloud Practitioner</h1>
+                    <h2>Practice Exam Dashboard</h2>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <h3>Total Exams Taken</h3>
+                            <p id="total-exams">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-info">
+                            <h3>Highest Score</h3>
+                            <p id="highest-score">0%</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <h3>Exams Passed</h3>
+                            <p id="exams-passed">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-info">
+                            <h3>Average Time</h3>
+                            <p id="avg-time">0 min</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exam-selection">
+                    <h3>Select an Exam</h3>
+                    <div class="exam-grid">
+                        <div class="exam-card" data-exam="exam1">
+                            <div class="exam-header">
+                                <h4>Practice Exam 1</h4>
+                                <span class="exam-badge">New</span>
+                            </div>
+                            <div class="exam-details">
+                                <p><strong>Questions:</strong> 50</p>
+                                <p><strong>Time Limit:</strong> 70 minutes</p>
+                                <p><strong>Best Score:</strong> <span id="exam1-best">Not taken</span></p>
+                            </div>
+                            <button class="btn btn-primary start-exam-btn" data-exam="exam1">Start Exam</button>
+                        </div>
+                        
+                        <div class="exam-card" data-exam="exam2">
+                            <div class="exam-header">
+                                <h4>Practice Exam 2</h4>
+                                <span class="exam-badge">Original</span>
+                            </div>
+                            <div class="exam-details">
+                                <p><strong>Questions:</strong> 50</p>
+                                <p><strong>Time Limit:</strong> 70 minutes</p>
+                                <p><strong>Best Score:</strong> <span id="exam2-best">Not taken</span></p>
+                            </div>
+                            <button class="btn btn-primary start-exam-btn" data-exam="exam2">Start Exam</button>
+                        </div>
+                        
+                        <div class="exam-card" data-exam="exam3">
+                            <div class="exam-header">
+                                <h4>Practice Exam 3</h4>
+                                <span class="exam-badge">Latest</span>
+                            </div>
+                            <div class="exam-details">
+                                <p><strong>Questions:</strong> 50</p>
+                                <p><strong>Time Limit:</strong> 70 minutes</p>
+                                <p><strong>Best Score:</strong> <span id="exam3-best">Not taken</span></p>
+                            </div>
+                            <button class="btn btn-primary start-exam-btn" data-exam="exam3">Start Exam</button>
+                        </div>
+                        
+                        <div class="exam-card" data-exam="exam4">
+                            <div class="exam-header">
+                                <h4>Practice Exam 4</h4>
+                                <span class="exam-badge">New</span>
+                            </div>
+                            <div class="exam-details">
+                                <p><strong>Questions:</strong> 50</p>
+                                <p><strong>Time Limit:</strong> 70 minutes</p>
+                                <p><strong>Best Score:</strong> <span id="exam4-best">Not taken</span></p>
+                            </div>
+                            <button class="btn btn-primary start-exam-btn" data-exam="exam4">Start Exam</button>
+                        </div>
+                        
+                        <div class="exam-card" data-exam="exam5">
+                            <div class="exam-header">
+                                <h4>Practice Exam 5</h4>
+                                <span class="exam-badge">Latest</span>
+                            </div>
+                            <div class="exam-details">
+                                <p><strong>Questions:</strong> 50</p>
+                                <p><strong>Time Limit:</strong> 70 minutes</p>
+                                <p><strong>Best Score:</strong> <span id="exam5-best">Not taken</span></p>
+                            </div>
+                            <button class="btn btn-primary start-exam-btn" data-exam="exam5">Start Exam</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-results">
+                    <h3>Recent Results</h3>
+                    <div id="recent-results-list">
+                        <p class="no-results">No exams taken yet. Start your first exam!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Welcome Screen -->
-        <div id="welcome-screen" class="screen active">
+        <div id="welcome-screen" class="screen">
             <div class="welcome-content">
-                <h1>AWS Practice Exam </h1>
+                <h1 id="exam-title">AWS Practice Exam</h1>
                 <h2>Disclaimer</h2>
-                <h4>This, AWS Cloud Practitioner, is designed by Pragyan Budhathoki to help you take mock exam before you go for real AWS exam. If you have doubt with answers, feel free to use other resources.
+                <h4>This web application is designed by Pragyan Budhathoki to help you take mock exam before you go for real AWS exam. If you have doubt with answers, feel free to use other resources.
                     <h3 style="color: red;">This exam is not affiliated with AWS or any other organization. Real exam is set for 90 minutes time frame with 65 questions, among them 50 are graded questions and 15 are for future reference questions but we are unknown about those 15 questions.This is a practice exam for AWS Cloud Practitioner.</h3>
                     <h3 style="color: red;">I have set timer for 70 minutes. Feel free to clone repo and alter the questions as you want.</h3>
                 </h4>
+                
+                <div class="source-links">
+                    <h3>📚 Source Links</h3>
+                    <div id="source-links-content">
+                        <p><strong>Practice Exam 1:</strong> <a href="https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-12.md" target="_blank">🔗 GitHub - Practice Exam 12</a></p>
+                        <p><strong>Practice Exam 2:</strong> <a href="https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-20.md" target="_blank">🔗 GitHub - Practice Exam 20</a></p>
+                        <p><strong>Practice Exam 3:</strong> <a href="https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-16.md" target="_blank">🔗 GitHub - Practice Exam 16</a></p>
+                        <p><strong>Practice Exam 4:</strong> <a href="https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-22.md" target="_blank">🔗 GitHub - Practice Exam 22</a></p>
+                        <p><strong>Practice Exam 5:</strong> <a href="https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-14.md" target="_blank">🔗 GitHub - Practice Exam 14</a></p>
+                    </div>
+                </div>
+                
                 <div class="exam-info">
                     <p><strong>Total Questions:</strong> 50</p>
                     <p><strong>Points per Question:</strong> 20</p>
@@ -35,14 +165,17 @@
                         <li>The exam will automatically submit when the 70-minute time limit expires</li>
                     </ul>
                 </div>
-                <button id="start-exam" class="btn btn-primary">Start Exam</button>
+                <div class="welcome-buttons">
+                    <button id="start-exam" class="btn btn-primary">Start Exam</button>
+                    <button id="back-to-dashboard" class="btn btn-secondary">Back to Dashboard</button>
+                </div>
             </div>
         </div>
 
         <!-- Exam Screen -->
         <div id="exam-screen" class="screen">
             <div class="exam-header">
-                <h2>AWS Practice Exam 20</h2>
+                <h2 id="exam-header-title">AWS Practice Exam</h2>
                 <div class="progress-info">
                     <span id="question-counter">Question 1 of 50</span>
                     <div class="timer-container">
@@ -79,6 +212,7 @@
                 <div class="action-buttons">
                     <button id="review-exam" class="btn btn-secondary">Review Answers</button>
                     <button id="retake-exam" class="btn btn-primary">Retake Exam</button>
+                    <button id="back-to-dashboard-from-results" class="btn btn-primary">Back to Dashboard</button>
                 </div>
             </div>
         </div>
