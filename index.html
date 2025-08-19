@@ -12,15 +12,17 @@
         <div id="welcome-screen" class="screen active">
             <div class="welcome-content">
                 <h1>AWS Practice Exam </h1>
-                <h4>This, AWS Cloud Practitioner, is designed by Pragyan Budhathoki to help you take mock exam before you go for final exams. If you have doubt with answers, feel free to use other resources.
-                    <h3>This exam is not affiliated with AWS or any other organization. This is a practice exam for AWS Cloud Practitioner.</h3>
+                <h2>Disclaimer</h2>
+                <h4>This, AWS Cloud Practitioner, is designed by Pragyan Budhathoki to help you take mock exam before you go for real AWS exam. If you have doubt with answers, feel free to use other resources.
+                    <h3 style="color: red;">This exam is not affiliated with AWS or any other organization. Real exam is set for 90 minutes time frame with 65 questions, among them 50 are graded questions and 15 are for future reference questions but we are unknown about those 15 questions.This is a practice exam for AWS Cloud Practitioner.</h3>
+                    <h3 style="color: red;">I have set timer for 70 minutes. Feel free to clone repo and alter the questions as you want.</h3>
                 </h4>
                 <div class="exam-info">
                     <p><strong>Total Questions:</strong> 50</p>
                     <p><strong>Points per Question:</strong> 20</p>
                     <p><strong>Total Points:</strong> 1000</p>
                     <p><strong>Passing Score:</strong> 70% (700 points)</p>
-                    <p><strong>Time Limit:</strong> No time limit</p>
+                    <p><strong>Time Limit:</strong> 70 minutes</p>
                 </div>
                 <div class="instructions">
                     <h3>Instructions:</h3>
@@ -30,6 +32,7 @@
                         <li>Some questions may have multiple correct answers</li>
                         <li>You can review and change your answers before submitting</li>
                         <li>Click "Submit Exam" when you're ready to finish</li>
+                        <li>The exam will automatically submit when the 70-minute time limit expires</li>
                     </ul>
                 </div>
                 <button id="start-exam" class="btn btn-primary">Start Exam</button>
@@ -42,6 +45,9 @@
                 <h2>AWS Practice Exam 20</h2>
                 <div class="progress-info">
                     <span id="question-counter">Question 1 of 50</span>
+                    <div class="timer-container">
+                        <span id="timer">70:00</span>
+                    </div>
                     <div class="progress-bar">
                         <div id="progress-fill"></div>
                     </div>

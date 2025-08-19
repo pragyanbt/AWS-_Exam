@@ -565,6 +565,9 @@ const examQuestions = [
 let currentQuestionIndex = 0;
 let userAnswers = new Array(examQuestions.length).fill(null);
 let examSubmitted = false;
+let examTimer = null;
+let timeRemaining = 70 * 60; // 70 minutes in seconds
+let examStarted = false;
 
 // DOM elements
 const screens = {
@@ -577,6 +580,15 @@ const screens = {
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     initializeEventListeners();
+});
+
+// Prevent accidental page refresh or navigation during exam
+window.addEventListener('beforeunload', function(e) {
+    if (examStarted && !examSubmitted) {
+        e.preventDefault();
+        e.returnValue = 'Are you sure you want to leave? Your exam progress will be lost.';
+        return e.returnValue;
+    }
 });
 
 function initializeEventListeners() {
@@ -609,6 +621,8 @@ function showScreen(screenName) {
 function startExam() {
     showScreen('exam');
     displayQuestion(0);
+    startTimer();
+    examStarted = true;
 }
 
 function displayQuestion(index) {
@@ -725,6 +739,7 @@ function nextQuestion() {
 
 function submitExam() {
     examSubmitted = true;
+    stopTimer();
     const results = calculateResults();
     displayResults(results);
     showScreen('results');
@@ -780,6 +795,11 @@ function displayResults(results) {
     const percentage = document.getElementById('percentage');
     const scoreDetails = document.getElementById('score-details');
     
+    // Calculate time taken
+    const timeTaken = 70 * 60 - timeRemaining;
+    const minutesTaken = Math.floor(timeTaken / 60);
+    const secondsTaken = timeTaken % 60;
+    
     // Set result header
     resultHeader.innerHTML = `<div class="${results.passed ? 'pass' : 'fail'}">${results.passed ? 'PASSED!' : 'FAILED'}</div>`;
     
@@ -796,6 +816,10 @@ function displayResults(results) {
         <div class="score-item">
             <span>Incorrect Answers:</span>
             <span>${results.totalQuestions - results.correctAnswers}/${results.totalQuestions}</span>
+        </div>
+        <div class="score-item">
+            <span>Time Taken:</span>
+            <span>${minutesTaken}:${secondsTaken.toString().padStart(2, '0')}</span>
         </div>
         <div class="score-item">
             <span>Passing Score Required:</span>
@@ -842,7 +866,60 @@ function retakeExam() {
     currentQuestionIndex = 0;
     userAnswers = new Array(examQuestions.length).fill(null);
     examSubmitted = false;
+    timeRemaining = 70 * 60;
+    examStarted = false;
+    
+    // Clear timer
+    if (examTimer) {
+        clearInterval(examTimer);
+        examTimer = null;
+    }
     
     // Show welcome screen
     showScreen('welcome');
+}
+
+function startTimer() {
+    updateTimerDisplay();
+    examTimer = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        
+        if (timeRemaining <= 0) {
+            clearInterval(examTimer);
+            timeUp();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    const timerElement = document.getElementById('timer');
+    
+    if (timerElement) {
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        // Add warning classes based on time remaining
+        timerElement.classList.remove('warning', 'danger');
+        if (timeRemaining <= 300 && timeRemaining > 60) { // 5 minutes to 1 minute
+            timerElement.classList.add('warning');
+        } else if (timeRemaining <= 60) { // Last minute
+            timerElement.classList.add('danger');
+        }
+    }
+}
+
+function timeUp() {
+    if (!examSubmitted) {
+        alert('Time is up! Your exam will be submitted automatically.');
+        submitExam();
+    }
+}
+
+function stopTimer() {
+    if (examTimer) {
+        clearInterval(examTimer);
+        examTimer = null;
+    }
 }
