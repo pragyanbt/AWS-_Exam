@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Practice Exam 20</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <h1>AWS Practice Exam 20</h1>
+                <div class="exam-info">
+                    <p><strong>Total Questions:</strong> 50</p>
+                    <p><strong>Points per Question:</strong> 20</p>
+                    <p><strong>Total Points:</strong> 1000</p>
+                    <p><strong>Passing Score:</strong> 70% (700 points)</p>
+                    <p><strong>Time Limit:</strong> No time limit</p>
+                </div>
+                <div class="instructions">
+                    <h3>Instructions:</h3>
+                    <ul>
+                        <li>Read each question carefully</li>
+                        <li>Select the best answer(s) for each question</li>
+                        <li>Some questions may have multiple correct answers</li>
+                        <li>You can review and change your answers before submitting</li>
+                        <li>Click "Submit Exam" when you're ready to finish</li>
+                    </ul>
+                </div>
+                <button id="start-exam" class="btn btn-primary">Start Exam</button>
+            </div>
+        </div>
+
+        <!-- Exam Screen -->
+        <div id="exam-screen" class="screen">
+            <div class="exam-header">
+                <h2>AWS Practice Exam 20</h2>
+                <div class="progress-info">
+                    <span id="question-counter">Question 1 of 50</span>
+                    <div class="progress-bar">
+                        <div id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div id="question-content"></div>
+                <div class="navigation-buttons">
+                    <button id="prev-btn" class="btn btn-secondary">Previous</button>
+                    <button id="next-btn" class="btn btn-primary">Next</button>
+                    <button id="submit-exam" class="btn btn-success" style="display: none;">Submit Exam</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-content">
+                <div id="result-header"></div>
+                <div class="score-display">
+                    <h2>Your Score: <span id="final-score">0</span>/1000</h2>
+                    <h3>Percentage: <span id="percentage">0</span>%</h3>
+                </div>
+                <div class="score-breakdown">
+                    <h3>Score Breakdown:</h3>
+                    <div id="score-details"></div>
+                </div>
+                <div class="action-buttons">
+                    <button id="review-exam" class="btn btn-secondary">Review Answers</button>
+                    <button id="retake-exam" class="btn btn-primary">Retake Exam</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Screen -->
+        <div id="review-screen" class="screen">
+            <div class="review-header">
+                <h2>Exam Review</h2>
+                <button id="back-to-results" class="btn btn-secondary">Back to Results</button>
+            </div>
+            <div id="review-content"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
