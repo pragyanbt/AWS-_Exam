@@ -1,4 +1,4 @@
-# AWS Practice Exam 20 - Interactive Exam Interface
+# AWS Practice Exam - Interactive Exam Interface
 
 A modern, responsive web-based exam interface for AWS Cloud Practitioner practice questions.
 
